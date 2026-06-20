@@ -16,7 +16,8 @@ def simulate_joint(Kp, Kd, Ki, target, theta_start=0.0, dt=0.01, steps=1000, I=1
         history.append(theta)
     return history
 
-history = simulate_joint(Kp=10, Kd=5, Ki=0.0001, target=90)    #drive joint from 0 -> 90
-plt.plot(history)
-plt.axhline(90, color='r', linestyle='--', label='target')
-plt.xlabel('timestep'); plt.ylabel('angle'); plt.legend(); plt.show()
+if __name__ == "__main__":
+    history = simulate_joint(Kp=10, Kd=6, Ki=0.0001, target=90)    #drive joint from 0 -> 90
+    plt.plot(history)
+    plt.axhline(90, color='r', linestyle='--', label='target')
+    plt.xlabel('timestep'); plt.ylabel('angle'); plt.legend(); plt.show()

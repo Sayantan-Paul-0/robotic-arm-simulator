@@ -11,7 +11,7 @@ the target.
   `None` for unreachable targets.
 - **Animation** — interpolates the joint angles frame by frame and visualizes the
   arm sweeping to the target with matplotlib.
-- **PID Control** - Implemented and tuned a PID controller for a single joint (torque-driven, with simulated dynamics). Tuning balances three competing terms: P pulls toward the target, D damps overshoot (tuned toward critical damping for fast settling without oscillation), and I removes steady-state error but can cause overshoot/windup if too large. In this frictionless simulation, small I is sufficient.
+- **PID Control** - The two-link arm is driven to targets by two independent PID controllers (one per joint), simulated with torque-based dynamics and Euler integration. Tuning balances three competing terms: P pulls toward the target, D damps overshoot (tuned toward critical damping for fast settling without oscillation), and I removes steady-state error but can cause overshoot/windup if too large. In this frictionless simulation, small I is sufficient.
 
 ## How to run
 
@@ -23,12 +23,13 @@ the target.
 - Law of cosines for the inverse problem; the interior triangle angle is the
   supplement of the joint angle (θ2 = 180° − φ).
 - A forward/inverse round-trip test to verify the two are true inverses.
+- Joint-space control — each joint runs its own PID; final hand accuracy is independent of arrival timing, while the path depends on per-joint tuning.
 
 ## Known limitations
-- Kinematic only — no physics or joint torque yet (PID control is the next step).
 - Returns a single elbow-down solution (elbow-up not yet exposed).
 - The origin (d = 0) is treated as unreachable.
-- The two-link arm animation is still kinematic (interpolated) — the PID controller has been built and tuned on a single joint but not yet integrated into the arm. That integration is the next step.
+- The two-link arm animation is still kinematic (interpolated) with PID controller integrated
+- Single elbow solution, no gravity/friction term (so I is near-zero), simplified inertia model.
 
 ## Tech
 Python, NumPy, Matplotlib

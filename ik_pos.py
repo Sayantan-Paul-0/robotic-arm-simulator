@@ -25,6 +25,7 @@ def ik_pos(L1,L2,x,y):
     theta1 = math.degrees(theta_target - beta)
     return theta1,theta2
 
-angles = ik_pos(1,1,1,1)
-print('IK Angles:',angles)
-print('FK Position:',fk_pos.fk_position(1,1,angles[0],angles[1]))
+if __name__ == "__main__":
+    angles = ik_pos(1,1,1,1)
+    print('IK Angles:',angles)
+    print('FK Position:',fk_pos.fk_position(1,1,angles[0],angles[1]))
